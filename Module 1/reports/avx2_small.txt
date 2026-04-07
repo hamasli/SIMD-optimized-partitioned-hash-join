@@ -1,0 +1,26 @@
+Element-wise self-check: PASS
+Configuration:
+  impl      = avx2
+  N         = 16
+  P         = 8
+  seed      = 42
+  repeats   = 5
+
+Results:
+  checksum              = 3372711514673124312
+  median time (ms)      = 0.000
+  mean time (ms)        = 0.000
+  stddev time (ms)      = 0.000
+  throughput (elem/s)   = 400000000.00
+
+Sample output:
+i=0 key=13930160852258120406 part=3
+i=1 key=11788048577503494824 part=5
+i=2 key=13874630024467741450 part=7
+i=3 key=2513787319205155662 part=6
+i=4 key=16662371453428439381 part=1
+i=5 key=1735254072534978428 part=4
+i=6 key=10598951352238613536 part=7
+i=7 key=6878563960102566144 part=2
+i=8 key=5052085463162682550 part=5
+i=9 key=7199227068870524257 part=6
