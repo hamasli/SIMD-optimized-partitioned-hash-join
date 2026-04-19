@@ -79,7 +79,87 @@ Key results (NR = NS = 10M records, P = 256 partitions):
 | Sequential | 0.689 | 1.00× |
 | Parallel (8 threads) | 0.177 | **3.91×** |
 
-See [`Module 2/README.md`](Module%202/README.md) for full algorithm description, build instructions, usage, and all benchmark results.
+See [`Module 2/README.md`](Module%202/README.md) for the full algorithm description and all benchmark results.
+
+---
+
+## 🚀 Quick Start — Run the Full Pipeline (Module 2)
+
+> Module 2 is the complete pipeline — it uses the partition mapping from Module 1 and delivers a fully working parallel hash join.
+
+### Requirements
+
+| Requirement | Detail |
+|---|---|
+| Compiler | `g++` with C++20 support |
+| Architecture | x86-64 with AVX2 |
+| OS | Linux |
+| Threads | POSIX threads (`-pthread`) |
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/hamasli/SIMD-optimized-partitioned-hash-join.git
+cd SIMD-optimized-partitioned-hash-join/Module\ 2
+```
+
+### 2. Build
+
+```bash
+# Build both sequential and parallel binaries
+make all
+
+# Or build individually
+make seq       # sequential only
+make par       # parallel only
+make clean     # remove compiled binaries
+```
+
+### 3. Run correctness tests
+
+```bash
+make test-small          # tiny input (NR=10, NS=10) — naive verifier triggered
+make test-medium-small   # NR=200, NS=200 — high duplicate rate
+make test-medium         # NR=1M, NS=1M — correctness + first speedup check
+```
+
+Expected output: `naive_check=PASS` and `par_vs_seq_check=PASS`
+
+### 4. Run the main benchmark
+
+```bash
+make test-large          # NR=10M, NS=10M, P=256, T=8
+```
+
+Override parameters from the command line:
+
+```bash
+make test-large NR=50000000 NS=50000000 P=512 T=16
+```
+
+### 5. Scalability experiments
+
+```bash
+make run-strong    # strong scalability — fixed NR=NS=20M, threads: 1,2,4,8,16
+make run-weak      # weak scalability  — NR/NS grows with thread count
+make run-vary-p    # vary partition count P — fixed NR=NS=10M, T=8
+```
+
+### 6. Run binaries directly
+
+```bash
+./bin/hashjoin_seq -nr 10000000 -ns 10000000 -seed 42 -max-key 1000000 -p 256
+./bin/hashjoin_par -nr 10000000 -ns 10000000 -seed 42 -max-key 1000000 -p 256 -t 8
+```
+
+| Flag | Description | Default |
+|---|---|---|
+| `-nr` | Records in relation R | `10000000` |
+| `-ns` | Records in relation S | `10000000` |
+| `-seed` | Random seed | `42` |
+| `-max-key` | Key range `[0, MAX_KEY)` — controls duplicate rate | `1000000` |
+| `-p` | Number of partitions (must be power of two) | `256` |
+| `-t` | Number of threads *(parallel binary only)* | `8` |
 
 ---
 
