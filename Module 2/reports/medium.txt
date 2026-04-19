@@ -1,0 +1,52 @@
+==============================================
+MEDIUM CORRECTNESS + PERFORMANCE TEST
+NR=1000000  NS=1000000  P=128  seed=42
+==============================================
+
+--- Sequential ---
+./bin/hashjoin_seq -nr 1000000 -ns 1000000 -seed 42 -max-key 100000 -p 128
+NR=1000000 NS=1000000 P=128 seed=42 [0, 100000)
+join_count=10001342
+checksum1=5873676674718999256
+checksum2=17559622841555577714
+r_histogram_sec=0.004362
+r_prefix_sec=0.000001
+r_scatter_sec=0.012191
+partition_r_sec=0.016554
+s_histogram_sec=0.004837
+s_prefix_sec=0.000000
+s_scatter_sec=0.012587
+partition_s_sec=0.017425
+join_sec=0.024215
+time_sec=0.058220
+
+--- Parallel (threads=8          ) ---
+./bin/hashjoin_par -nr 1000000 -ns 1000000 -seed 42 -max-key 100000 -p 128 -t 8          
+NR=1000000 NS=1000000 P=128 seed=42 [0, 100000) threads=8
+join_count=10001342
+checksum1=5873676674718999256
+checksum2=17559622841555577714
+seq_r_histogram_sec=0.005063
+seq_r_prefix_sec=0.000001
+seq_r_scatter_sec=0.013137
+seq_partition_r_sec=0.018202
+seq_s_histogram_sec=0.003702
+seq_s_prefix_sec=0.000001
+seq_s_scatter_sec=0.011948
+seq_partition_s_sec=0.015652
+seq_join_sec=0.023927
+seq_time_sec=0.057820
+par_r_histogram_sec=0.001401
+par_r_prefix_sec=0.000006
+par_r_scatter_sec=0.006224
+par_partition_r_sec=0.007633
+par_s_histogram_sec=0.001035
+par_s_prefix_sec=0.000011
+par_s_scatter_sec=0.006264
+par_partition_s_sec=0.007311
+par_join_sec=0.003554
+par_time_sec=0.018508
+speedup=3.12x
+par_vs_seq_check=PASS
+
+EXPECTED: par_vs_seq_check=PASS, speedup > 1

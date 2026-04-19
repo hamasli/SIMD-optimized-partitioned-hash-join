@@ -1,0 +1,52 @@
+==============================================
+LARGE PERFORMANCE BENCHMARK
+NR=10000000     NS=10000000     P=256          seed=42           max-key=1000000    
+==============================================
+
+--- Sequential baseline ---
+./bin/hashjoin_seq -nr 10000000    -ns 10000000    -seed 42          -max-key 1000000     -p 256        
+NR=10000000 NS=10000000 P=256 seed=42 [0, 1000000)
+join_count=100010127
+checksum1=2412036105350664301
+checksum2=2208260203496835892
+r_histogram_sec=0.050885
+r_prefix_sec=0.000003
+r_scatter_sec=0.128793
+partition_r_sec=0.179685
+s_histogram_sec=0.051817
+s_prefix_sec=0.000003
+s_scatter_sec=0.128689
+partition_s_sec=0.180513
+join_sec=0.328965
+time_sec=0.689216
+
+--- Parallel (threads=8          ) ---
+./bin/hashjoin_par -nr 10000000    -ns 10000000    -seed 42          -max-key 1000000     -p 256         -t 8          
+NR=10000000 NS=10000000 P=256 seed=42 [0, 1000000) threads=8
+join_count=100010127
+checksum1=2412036105350664301
+checksum2=2208260203496835892
+seq_r_histogram_sec=0.050207
+seq_r_prefix_sec=0.000004
+seq_r_scatter_sec=0.129736
+seq_partition_r_sec=0.179952
+seq_s_histogram_sec=0.051697
+seq_s_prefix_sec=0.000005
+seq_s_scatter_sec=0.129339
+seq_partition_s_sec=0.181044
+seq_join_sec=0.330055
+seq_time_sec=0.691118
+par_r_histogram_sec=0.007606
+par_r_prefix_sec=0.000011
+par_r_scatter_sec=0.057516
+par_partition_r_sec=0.065137
+par_s_histogram_sec=0.008752
+par_s_prefix_sec=0.000014
+par_s_scatter_sec=0.057188
+par_partition_s_sec=0.065958
+par_join_sec=0.045603
+par_time_sec=0.176708
+speedup=3.91x
+par_vs_seq_check=PASS
+
+EXPECTED: par_vs_seq_check=PASS, speedup > 1

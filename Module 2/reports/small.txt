@@ -1,0 +1,61 @@
+==============================================
+SMALL CORRECTNESS TEST
+NR=10  NS=10  P=4  seed=13  max-key=8
+Naive brute-force verifier will be triggered.
+==============================================
+
+--- Sequential ---
+./bin/hashjoin_seq -nr 10 -ns 10 -seed 13 -max-key 8 -p 4
+NR=10 NS=10 P=4 seed=13 [0, 8)
+join_count=16
+checksum1=15276860386417358078
+checksum2=1613137622612474084
+r_histogram_sec=0.000000
+r_prefix_sec=0.000000
+r_scatter_sec=0.000004
+partition_r_sec=0.000005
+s_histogram_sec=0.000000
+s_prefix_sec=0.000000
+s_scatter_sec=0.000000
+partition_s_sec=0.000000
+join_sec=0.000002
+time_sec=0.000008
+naive_join_count=16
+naive_checksum1=15276860386417358078
+naive_checksum2=1613137622612474084
+correctness_check=PASS
+
+--- Parallel (threads=4) ---
+./bin/hashjoin_par -nr 10 -ns 10 -seed 13 -max-key 8 -p 4 -t 4
+NR=10 NS=10 P=4 seed=13 [0, 8) threads=4
+join_count=16
+checksum1=15276860386417358078
+checksum2=1613137622612474084
+seq_r_histogram_sec=0.000000
+seq_r_prefix_sec=0.000000
+seq_r_scatter_sec=0.000003
+seq_partition_r_sec=0.000003
+seq_s_histogram_sec=0.000000
+seq_s_prefix_sec=0.000000
+seq_s_scatter_sec=0.000000
+seq_partition_s_sec=0.000000
+seq_join_sec=0.000002
+seq_time_sec=0.000008
+par_r_histogram_sec=0.000370
+par_r_prefix_sec=0.000002
+par_r_scatter_sec=0.000256
+par_partition_r_sec=0.000628
+par_s_histogram_sec=0.000263
+par_s_prefix_sec=0.000001
+par_s_scatter_sec=0.000255
+par_partition_s_sec=0.000520
+par_join_sec=0.000253
+par_time_sec=0.001405
+speedup=0.01x
+par_vs_seq_check=PASS
+naive_join_count=16
+naive_checksum1=15276860386417358078
+naive_checksum2=1613137622612474084
+naive_check=PASS
+
+EXPECTED: naive_check=PASS and par_vs_seq_check=PASS

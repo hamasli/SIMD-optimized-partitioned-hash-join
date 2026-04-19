@@ -59,8 +59,55 @@ The goal is to:
 - Compare scalar vs vectorized implementations  
 - Analyze performance limitations (e.g., memory-bound behavior)
 
+See [`Module 1/README.md`](Module%201/README.md) for full details.
+
+---
+
+## 🧩 Module 2: Parallel Partitioned Hash Join with Duplicates
+
+Module 2 builds on the partition mapping from Module 1 and implements a **complete, correct, and benchmarked hash join pipeline**:
+
+- Both a **sequential** reference and a **parallel** (`std::thread`) implementation  
+- Correct handling of **duplicate keys** (multiplicity-aware build/probe)  
+- Comprehensive **strong scalability**, **weak scalability**, and **partition-count** experiments  
+- Tested on the **SPM cluster (node09)**
+
+Key results (NR = NS = 10M records, P = 256 partitions):
+
+| Version | Time (s) | Speedup |
+|---|---|---|
+| Sequential | 0.689 | 1.00× |
+| Parallel (8 threads) | 0.177 | **3.91×** |
+
+See [`Module 2/README.md`](Module%202/README.md) for full algorithm description, build instructions, usage, and all benchmark results.
+
 ---
 
 ## 📂 Repository Structure
 
 This repository is organized into multiple modules:
+
+```
+SIMD-optimized-partitioned-hash-join/
+├── Module 1/          # SIMD-optimized partition mapping kernel (AVX2)
+│   ├── src/
+│   ├── build/
+│   ├── reports/
+│   ├── Makefile
+│   └── README.md
+├── Module 2/          # Parallel partitioned hash join (std::thread)
+│   ├── src/
+│   ├── bin/
+│   ├── reports/
+│   ├── Makefile
+│   └── README.md
+└── README.md          # This file — project overview
+```
+
+---
+
+## 👤 Author
+
+**Hamas Ali** — Student ID: 726267  
+MSc Computer Science — University of Pisa  
+Course: SPM (Scalable and Parallel Methodologies)

@@ -1,0 +1,152 @@
+==============================================
+WEAK SCALABILITY EXPERIMENT
+Problem size grows with thread count.
+Base: NR = NS = 5000000 per thread
+==============================================
+
+--- 1 thread  | NR=5000000  NS=5000000 ---
+./bin/hashjoin_par -nr 5000000 -ns 5000000 -seed 42          -max-key 1000000     -p 256         -t 1
+NR=5000000 NS=5000000 P=256 seed=42 [0, 1000000) threads=1
+join_count=25006567
+checksum1=17533050978094995485
+checksum2=15244916185902305632
+seq_r_histogram_sec=0.024696
+seq_r_prefix_sec=0.000003
+seq_r_scatter_sec=0.064059
+seq_partition_r_sec=0.088762
+seq_s_histogram_sec=0.024315
+seq_s_prefix_sec=0.000002
+seq_s_scatter_sec=0.064006
+seq_partition_s_sec=0.088328
+seq_join_sec=0.210739
+seq_time_sec=0.387889
+par_r_histogram_sec=0.024283
+par_r_prefix_sec=0.000005
+par_r_scatter_sec=0.064906
+par_partition_r_sec=0.089197
+par_s_histogram_sec=0.026317
+par_s_prefix_sec=0.000004
+par_s_scatter_sec=0.064287
+par_partition_s_sec=0.090612
+par_join_sec=0.242389
+par_time_sec=0.422203
+speedup=0.92x
+par_vs_seq_check=PASS
+
+--- 2 threads | NR=10000000 NS=10000000 ---
+./bin/hashjoin_par -nr 10000000 -ns 10000000 -seed 42          -max-key 1000000     -p 256         -t 2
+NR=10000000 NS=10000000 P=256 seed=42 [0, 1000000) threads=2
+join_count=100010127
+checksum1=2412036105350664301
+checksum2=2208260203496835892
+seq_r_histogram_sec=0.051346
+seq_r_prefix_sec=0.000003
+seq_r_scatter_sec=0.129626
+seq_partition_r_sec=0.180979
+seq_s_histogram_sec=0.050667
+seq_s_prefix_sec=0.000005
+seq_s_scatter_sec=0.131171
+seq_partition_s_sec=0.181848
+seq_join_sec=0.298767
+seq_time_sec=0.661660
+par_r_histogram_sec=0.026469
+par_r_prefix_sec=0.000005
+par_r_scatter_sec=0.087882
+par_partition_r_sec=0.114358
+par_s_histogram_sec=0.026313
+par_s_prefix_sec=0.000006
+par_s_scatter_sec=0.087810
+par_partition_s_sec=0.114131
+par_join_sec=0.176095
+par_time_sec=0.404593
+speedup=1.64x
+par_vs_seq_check=PASS
+
+--- 4 threads | NR=20000000 NS=20000000 ---
+./bin/hashjoin_par -nr 20000000 -ns 20000000 -seed 42          -max-key 1000000     -p 256         -t 4
+NR=20000000 NS=20000000 P=256 seed=42 [0, 1000000) threads=4
+join_count=400007695
+checksum1=3468824715885716279
+checksum2=2340131808881152158
+seq_r_histogram_sec=0.103458
+seq_r_prefix_sec=0.000003
+seq_r_scatter_sec=0.268322
+seq_partition_r_sec=0.371788
+seq_s_histogram_sec=0.104108
+seq_s_prefix_sec=0.000005
+seq_s_scatter_sec=0.270206
+seq_partition_s_sec=0.374325
+seq_join_sec=0.701446
+seq_time_sec=1.447622
+par_r_histogram_sec=0.030037
+par_r_prefix_sec=0.000007
+par_r_scatter_sec=0.132771
+par_partition_r_sec=0.162818
+par_s_histogram_sec=0.031982
+par_s_prefix_sec=0.000008
+par_s_scatter_sec=0.132595
+par_partition_s_sec=0.164589
+par_join_sec=0.164830
+par_time_sec=0.492245
+speedup=2.94x
+par_vs_seq_check=PASS
+
+--- 8 threads | NR=40000000 NS=40000000 ---
+./bin/hashjoin_par -nr 40000000 -ns 40000000 -seed 42          -max-key 1000000     -p 256         -t 8
+NR=40000000 NS=40000000 P=256 seed=42 [0, 1000000) threads=8
+join_count=1600021806
+checksum1=565225350065972995
+checksum2=139295573588567668
+seq_r_histogram_sec=0.207232
+seq_r_prefix_sec=0.000003
+seq_r_scatter_sec=0.522977
+seq_partition_r_sec=0.730218
+seq_s_histogram_sec=0.206463
+seq_s_prefix_sec=0.000004
+seq_s_scatter_sec=0.517649
+seq_partition_s_sec=0.724121
+seq_join_sec=1.187876
+seq_time_sec=2.642276
+par_r_histogram_sec=0.034050
+par_r_prefix_sec=0.000010
+par_r_scatter_sec=0.226567
+par_partition_r_sec=0.260635
+par_s_histogram_sec=0.032995
+par_s_prefix_sec=0.000011
+par_s_scatter_sec=0.227022
+par_partition_s_sec=0.260033
+par_join_sec=0.156046
+par_time_sec=0.676724
+speedup=3.90x
+par_vs_seq_check=PASS
+
+--- 16 threads | NR=80000000 NS=80000000 ---
+./bin/hashjoin_par -nr 80000000 -ns 80000000 -seed 42          -max-key 1000000     -p 256         -t 16
+NR=80000000 NS=80000000 P=256 seed=42 [0, 1000000) threads=16
+join_count=6399974057
+checksum1=5782687631005929593
+checksum2=2098398558780656001
+seq_r_histogram_sec=0.422809
+seq_r_prefix_sec=0.000004
+seq_r_scatter_sec=1.045941
+seq_partition_r_sec=1.468759
+seq_s_histogram_sec=0.416417
+seq_s_prefix_sec=0.000005
+seq_s_scatter_sec=1.046658
+seq_partition_s_sec=1.463084
+seq_join_sec=2.370609
+seq_time_sec=5.302516
+par_r_histogram_sec=0.050924
+par_r_prefix_sec=0.000017
+par_r_scatter_sec=0.464726
+par_partition_r_sec=0.515673
+par_s_histogram_sec=0.055596
+par_s_prefix_sec=0.000018
+par_s_scatter_sec=0.465071
+par_partition_s_sec=0.520690
+par_join_sec=0.197126
+par_time_sec=1.233501
+speedup=4.30x
+par_vs_seq_check=PASS
+
+Weak scalability done. Time should stay roughly constant.
